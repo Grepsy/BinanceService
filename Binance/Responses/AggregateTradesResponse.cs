@@ -1,10 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using Binance.Converters;
+using Newtonsoft.Json;
+using System;
 
 namespace Binance {
-    public class AggregateTradesResponse {
-    }
-
-    internal class AggregateTradeDto {
+    public class AggregateTradeResponse {
         /*
         "a": 26129,         // Aggregate tradeId
     "p": "0.01633102",  // Price
@@ -31,7 +30,8 @@ namespace Binance {
         public long LastTradeId { get; set; }
 
         [JsonProperty("T")]
-        public long Timestamp { get; set; }
+        [JsonConverter(typeof(UnixTimestampJsonConverter))]
+        public DateTime Timestamp { get; set; }
 
         [JsonProperty("m")]
         public bool IsMaker { get; set; }

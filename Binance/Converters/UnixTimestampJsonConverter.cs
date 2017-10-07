@@ -15,7 +15,7 @@ namespace Binance.Converters {
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) {
-            throw new NotImplementedException();
+            serializer.Serialize(writer, ((DateTime)value).ToTimestamp());
         }
 
         public override bool CanRead {
