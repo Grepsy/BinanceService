@@ -16,7 +16,7 @@ Or via the .NET Core command line interface:
     
 See the following section for usage examples.
 
-## Samples
+## Sample usage
 
 The API is split up into three logical classes mirroring the endpoints exposed by the Binance API. 
 
@@ -35,6 +35,7 @@ var binanceAccountService = new BinanceAccountService("KEY", "SECRET");
 The available methods on the classes are pretty self explanatory and fully documented. Some examples:
 
 ```csharp
+// Examples using the market endpoint
 var orderbook = await binanceMarketService.GetOrderBook("NEOBTC");
 Console.WriteLine("Orderbook: " + JsonConvert.SerializeObject(orderbook, Formatting.Indented));
 
@@ -43,9 +44,18 @@ Console.WriteLine("Agg trades: " + JsonConvert.SerializeObject(aggTrades, Format
 
 var priceStats = await binanceMarketService.GetPriceStats("NEOBTC");
 Console.WriteLine("Pricestats: " + JsonConvert.SerializeObject(priceStats, Formatting.Indented));
+
+// Examples using the account endpoint
+var order = await binanceAccount.PostOrder("NEOBTC", OrderSide.Buy, OrderType.Market, TimeInForce.ImmediateOrCancel, 0.10m, 1, test: true);
+Console.WriteLine("Market order: " + JsonConvert.SerializeObject(order, Formatting.Indented));
+
+var myTrades = await binanceAccount.GetTrades("NEOBTC");
+Console.WriteLine("My trades: " + JsonConvert.SerializeObject(myTrades, Formatting.Indented));
 ```
 
-For more guidance you can also have a look at the (official Binance documentation)[https://www.binance.com/restapipub.html].
+Please see the `BinanceService.Examples` project for more examples.
+
+For more guidance you can also have a look at the [official Binance documentation](https://www.binance.com/restapipub.html).
 
 ## Authors
 
