@@ -3,12 +3,12 @@ using Newtonsoft.Json;
 using System;
 
 namespace BinanceService.Responses {
-    public class StreamTrade {
-        [JsonProperty("a")]
-        public long TradeId { get; set; }
-
+    public class TradeEvent {
         [JsonProperty("e")]
         public string EventType { get; set; }
+
+        [JsonProperty("a")]
+        public long TradeId { get; set; }
 
         [JsonProperty("E")]
         [JsonConverter(typeof(UnixTimestampJsonConverter))]
