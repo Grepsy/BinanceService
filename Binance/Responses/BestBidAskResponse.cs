@@ -1,9 +1,17 @@
-﻿namespace Binance {
+﻿using Newtonsoft.Json;
+
+namespace Binance.Responses {
     public class BestBidAskResponse {
         public string Symbol { get; set; }
+
         public decimal BidPrice { get; set; }
-        public decimal BidQty { get; set; }
+
+        [JsonProperty("BidQty")]
+        public decimal BidQuantity { get; set; }
+
         public decimal AskPrice { get; set; }
-        public decimal AskQty { get; set; }
+
+        [JsonProperty("AskQty")]
+        public decimal AskQuantity { get; set; }
     }
 }

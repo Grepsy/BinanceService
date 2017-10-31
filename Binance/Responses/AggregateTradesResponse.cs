@@ -1,20 +1,10 @@
 ﻿using Newtonsoft.Json;
 
-namespace Binance {
+namespace Binance.Responses {
     public class AggregateTradesResponse {
     }
 
     internal class AggregateTradeDto {
-        /*
-        "a": 26129,         // Aggregate tradeId
-    "p": "0.01633102",  // Price
-    "q": "4.70443515",  // Quantity
-    "f": 27781,         // First tradeId
-    "l": 27781,         // Last tradeId
-    "T": 1498793709153, // Timestamp
-    "m": true,          // Was the buyer the maker?
-    "M": true           // Was the trade the best price match?
-    */
         [JsonProperty("a")]
         public long TradeId { get; set; }
 

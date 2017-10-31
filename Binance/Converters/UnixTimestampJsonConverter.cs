@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Binance.Extensions;
+using Newtonsoft.Json;
 using System;
 using System.Reflection;
 
@@ -10,12 +11,12 @@ namespace Binance.Converters {
             return timestamp.ToDateTime();
         }
 
-        public override bool CanConvert(Type type) {
-            return typeof(DateTime).IsAssignableFrom(type);
+        public override bool CanConvert(Type objectType) {
+            return typeof(DateTime).IsAssignableFrom(objectType);
         }
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) {
-            throw new NotImplementedException();
+            serializer.Serialize(writer, ((DateTime)value).ToUnixTimestamp());
         }
 
         public override bool CanRead {
