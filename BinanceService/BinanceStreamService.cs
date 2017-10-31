@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BinanceService.Responses;
+using Newtonsoft.Json;
+using System;
 using System.Net.WebSockets;
 using System.Text;
 using System.Threading;
@@ -15,16 +17,19 @@ namespace BinanceService {
             _client = new ClientWebSocket();
         }
 
-        public async Task StreamTrades(string symbol, CancellationToken cancellationToken) {
+        public async Task StreamTrades(string symbol, Action<StreamTrade> onTrade, CancellationToken cancellationToken) {
             var url = new Uri(_baseUrl + symbol.ToLower() + "@aggTrade");
 
-            await _client.ConnectAsync(url, CancellationToken.None);
+            await _client.ConnectAsync(url, cancellationToken);
             
             while (_client.State == WebSocketState.Open) {
                 var buffer = new ArraySegment<byte>(new byte[MAX_MESSAGE_SIZE]);
                 var result = await _client.ReceiveAsync(buffer, cancellationToken);
-                
-                Console.WriteLine(Encoding.UTF8.GetString(buffer.Array, 0, result.Count));
+                var payload = Encoding.UTF8.GetString(buffer.Array, 0, result.Count);
+
+                var trade = JsonConvert.DeserializeObject<StreamTrade>(payload);
+
+                onTrade(trade);
             }
         }
     }

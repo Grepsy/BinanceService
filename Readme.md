@@ -32,6 +32,12 @@ The account endpoint requires authentication using your API key and secret (can 
 var binanceAccountService = new BinanceAccountService("KEY", "SECRET");
 ```
 
+The steam-service exposes an easy way to consume the websockets streams in an asynchronous way.
+
+```csharp
+var binanceStream = new BinanceStreamService();
+```
+
 The available methods on the classes are pretty self explanatory and fully documented. Some examples:
 
 ```csharp
@@ -51,6 +57,9 @@ Console.WriteLine("Market order: " + JsonConvert.SerializeObject(order, Formatti
 
 var myTrades = await binanceAccount.GetTrades("NEOBTC");
 Console.WriteLine("My trades: " + JsonConvert.SerializeObject(myTrades, Formatting.Indented));
+
+// Example for streaming trades
+await binanceStream.StreamTrades("NEOBTC", (t) => Console.WriteLine(t.TradeId), cts.Token);
 ```
 
 Please see the `BinanceService.Examples` project for more examples.
