@@ -76,9 +76,14 @@ namespace BinanceService {
             var binanceStream = new BinanceStreamService();
             var cts = new CancellationTokenSource();
 
-            Console.WriteLine("Steaming trades...");
+            Console.WriteLine("Steaming depth...");
+            await binanceStream.StreamDepth("NEOBTC", (ev) => Console.WriteLine(ev.EventTime), cts.Token);
 
+            Console.WriteLine("Steaming trades...");
             await binanceStream.StreamTrades("NEOBTC", (trade) => Console.WriteLine(trade.Price), cts.Token);
+
+            Console.WriteLine("Steaming klines...");
+            await binanceStream.StreamKlines("NEOBTC", Interval.OneMinute, (ev) => Console.WriteLine(ev.EventTime), cts.Token);
         }
     }
 }
