@@ -1,4 +1,4 @@
-﻿namespace Binance {
+﻿namespace BinanceService {
     public class Interval {
         private readonly string _value;
 

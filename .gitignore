@@ -238,3 +238,4 @@ wwwroot/dist
 wwwroot/lib
 wwwroot/css/site.min.css
 wwwroot/js/site.min.js
+publish-nupkg.cmd
