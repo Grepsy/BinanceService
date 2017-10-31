@@ -20,6 +20,9 @@ namespace BinanceService {
         /// <param name="baseUrl">The webservice base URL.</param>
         /// <param name="receiveWindow">The receive-window to use.</param>
         public BinanceAccountService(string apiKey, string secretKey, string baseUrl = "https://www.binance.com/api/v3/", int receiveWindow = 5000) {
+            Guard.ArgumentNotNullOrWhitespace(apiKey, nameof(apiKey));
+            Guard.ArgumentNotNullOrWhitespace(secretKey, nameof(secretKey));
+
             var authHandler = new BinanceAuthenticationHandler(apiKey, secretKey, receiveWindow);
 
             _client = new HttpClient(authHandler);
@@ -71,7 +74,6 @@ namespace BinanceService {
                 parameters.Add(("stopPrice", stopPrice?.ToString(CultureInfo.InvariantCulture)));
             }
 
-            // TODO: Test always return empty content
             return await _client.PostJsonAsync<PostOrderResponse>(urlPath, parameters.ToArray());
         }
 
