@@ -2,9 +2,6 @@
 
 namespace BinanceService.Responses {
     public class AggregateTradesResponse {
-    }
-
-    internal class AggregateTradeDto {
         [JsonProperty("a")]
         public long TradeId { get; set; }
 

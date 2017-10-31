@@ -59,15 +59,13 @@ namespace BinanceService {
         /// <param name="startTime">The start-time (inclusive).</param>
         /// <param name="endTime">The end-time (inclusive).</param>
         /// <param name="limit">How much entries to request.</param>
-        public async Task<AggregateTradesResponse> GetAggregateTrades(string symbol, long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int limit = 500) {
-            var dto = await _client.GetJsonAsync<IEnumerable<AggregateTradeDto>>("aggTrades",
+        public async Task<IEnumerable<AggregateTradesResponse>> GetAggregateTrades(string symbol, long? fromId = null, DateTime? startTime = null, DateTime? endTime = null, int limit = 500) {
+            return await _client.GetJsonAsync<IEnumerable<AggregateTradesResponse>>("aggTrades",
                 ("symbol", symbol),
                 ("fromId", fromId?.ToString()),
                 ("startTime", startTime?.ToUnixTimestamp().ToString()),
                 ("endTime", endTime?.ToUnixTimestamp().ToString()),
                 ("limit", limit.ToString()));
-
-            return new AggregateTradesResponse();
         }
 
         /// <summary>
