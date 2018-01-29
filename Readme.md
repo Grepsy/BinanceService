@@ -1,5 +1,7 @@
 # BinanceService .NET API wrapper for the Binance Exchange
 
+**WARNING** This was a submission to the Binance C# API competition. It's not under active development anymore. I suggest a better alternative which is: https://github.com/binance-exchange/BinanceDotNet
+
 This project is a typed client-library for the Binance Exchange API. It makes it easy to integrate Binance API functionality in your application.
 
 [![NuGet](https://img.shields.io/nuget/v/binanceservice.svg)](https://www.nuget.org/packages/BinanceService)
